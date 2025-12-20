@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medical.ConsoleApp", "Medical.ConsoleApp\Medical.ConsoleApp.csproj", "{5C3D6803-1FD5-4AC8-984F-1443823B6FB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyOrm", "MyOrm\MyOrm.csproj", "{A0CBA5FD-4544-4891-A126-FA66937EAAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medical.Domain", "Medical.Domain\Medical.Domain.csproj", "{6D9D79FD-E317-42FA-ABAA-D2D17CFD5154}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C3D6803-1FD5-4AC8-984F-1443823B6FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3D6803-1FD5-4AC8-984F-1443823B6FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3D6803-1FD5-4AC8-984F-1443823B6FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3D6803-1FD5-4AC8-984F-1443823B6FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CBA5FD-4544-4891-A126-FA66937EAAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CBA5FD-4544-4891-A126-FA66937EAAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CBA5FD-4544-4891-A126-FA66937EAAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CBA5FD-4544-4891-A126-FA66937EAAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9D79FD-E317-42FA-ABAA-D2D17CFD5154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9D79FD-E317-42FA-ABAA-D2D17CFD5154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9D79FD-E317-42FA-ABAA-D2D17CFD5154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9D79FD-E317-42FA-ABAA-D2D17CFD5154}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
