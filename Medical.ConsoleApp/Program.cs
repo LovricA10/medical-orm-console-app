@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Medical.ConsoleApp.App;
+using Medical.ConsoleApp.Config;
+using MyOrm.Core;
+using Spectre.Console;
 
-class Program
+try
 {
-    static void Main()
-    {
-        Console.WriteLine("Medical ORM Console App");
-        Console.ReadLine();
-    }
+    using var db = new OrmContext(AppConfig.ConnectionString);
+
+    Seed.EnsureDoctorsSeeded(db);
+
+    new ConsoleMenu(db).Run();
+}
+catch (Exception ex)
+{
+    AnsiConsole.WriteException(ex, ExceptionFormats.ShortenPaths | ExceptionFormats.ShortenTypes);
 }
