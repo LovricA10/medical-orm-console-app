@@ -11,6 +11,7 @@ namespace MyOrm.Core
         private readonly Dictionary<Type, EntityMap> _mapCache = [];
 
         private bool _disposed;
+        public NpgsqlConnection Connection => _connection;
 
         public OrmContext(string connectionString)
         {

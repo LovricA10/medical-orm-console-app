@@ -83,7 +83,7 @@ namespace MyOrm.Migrations
             cmd.Parameters.AddWithValue("@t", table);
 
             using var r = cmd.ExecuteReader();
-            var set = new HashSet<string>(StringComparer.Ordinal);
+            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             while (r.Read())
                 set.Add(r.GetString(0));
