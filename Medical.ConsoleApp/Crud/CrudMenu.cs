@@ -22,6 +22,20 @@ namespace Medical.ConsoleApp.Crud
                 if (extra is not null) choices.AddRange(extra.Keys);
                 choices.Add("Back");
 
+                var actions = new Dictionary<string, Action>
+                {
+                    ["List"] = list,
+                    ["Add"] = add,
+                    ["Update"] = update,
+                    ["Delete"] = delete
+                };
+
+                if (extra is not null)
+                {
+                    foreach (var kv in extra)
+                        actions[kv.Key] = kv.Value;
+                }
+
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("Choose operation")
@@ -33,11 +47,7 @@ namespace Medical.ConsoleApp.Crud
 
                 try
                 {
-                    if (choice == "List") list();
-                    else if (choice == "Add") add();
-                    else if (choice == "Update") update();
-                    else if (choice == "Delete") delete();
-                    else extra![choice]();
+                    actions[choice]();
                 }
                 catch (Exception ex)
                 {
