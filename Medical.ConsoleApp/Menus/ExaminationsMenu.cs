@@ -69,8 +69,12 @@ namespace Medical.ConsoleApp.Menus
             x.Type = UiPrompts.AskOptional("Type", x.Type);
             x.ScheduledAt = UiPrompts.AskOptionalDateTime("ScheduledAt", x.ScheduledAt);
 
-            var doc = AnsiConsole.Ask<string>($"DoctorId ([grey]{x.DoctorId}[/]) (enter to keep):");
-            if (!string.IsNullOrWhiteSpace(doc)) x.DoctorId = int.Parse(doc);
+            var doc = AnsiConsole.Prompt(
+                 new TextPrompt<string>($"DoctorId ([grey]{x.DoctorId}[/]) (enter to keep):")
+                .AllowEmpty()
+);
+            if (!string.IsNullOrWhiteSpace(doc))
+                x.DoctorId = int.Parse(doc);
 
             _db.Update(x);
             UiMessages.Ok("Updated examination.");

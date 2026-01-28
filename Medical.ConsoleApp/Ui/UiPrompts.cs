@@ -35,7 +35,11 @@ namespace Medical.ConsoleApp.Ui
 
         public static DateTime AskOptionalDate(string label, DateTime current)
         {
-            var s = AnsiConsole.Ask<string>($"{label} ([grey]{current:yyyy-MM-dd}[/]) (enter to keep):");
+            var s = AnsiConsole.Prompt(
+                new TextPrompt<string>($"{label} ([grey]{current:yyyy-MM-dd}[/]) (enter to keep):")
+                .AllowEmpty()
+            );
+
             return string.IsNullOrWhiteSpace(s) ? current : DateTime.Parse(s);
         }
 
@@ -48,7 +52,11 @@ namespace Medical.ConsoleApp.Ui
         public static DateTime? AskOptionalNullableDate(string label, DateTime? current)
         {
             var shown = current.HasValue ? current.Value.ToString("yyyy-MM-dd") : "null";
-            var s = AnsiConsole.Ask<string>($"{label} ([grey]{shown}[/]) (enter to keep):");
+
+            var s = AnsiConsole.Prompt(
+                new TextPrompt<string>($"{label} ([grey]{shown}[/]) (enter to keep):")
+                    .AllowEmpty()
+            );
 
             if (string.IsNullOrWhiteSpace(s))
                 return current;
@@ -66,8 +74,15 @@ namespace Medical.ConsoleApp.Ui
 
         public static DateTime AskOptionalDateTime(string label, DateTime current)
         {
-            var s = AnsiConsole.Ask<string>($"{label} ([grey]{current:yyyy-MM-dd HH:mm}[/]) (enter to keep):");
-            return string.IsNullOrWhiteSpace(s) ? current : DateTime.Parse(s);
+            var prompt = new TextPrompt<string>(
+                $"{label} ([grey]{current:yyyy-MM-dd HH:mm}[/]) (enter to keep):")
+                .AllowEmpty();
+
+            var s = AnsiConsole.Prompt(prompt);
+
+            return string.IsNullOrWhiteSpace(s)
+                ? current
+                : DateTime.Parse(s);
         }
     }
 }
