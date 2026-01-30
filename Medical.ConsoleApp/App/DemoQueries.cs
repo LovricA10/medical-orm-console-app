@@ -23,10 +23,13 @@ namespace Medical.ConsoleApp.App
 
             var history = db.SelectWhere<MedicalHistory>("patient_id = @p0", patientId);
             var therapies = db.SelectWhere<Therapy>("patient_id = @p0", patientId);
+            var exams = db.SelectWhere<Examination>("patient_id = @p0", patientId);
+            var doctorsById = BuildDoctorMap(db);
 
             AnsiConsole.Write(BuildPatientPanel(patient));
             RenderHistory(history, diagnosesById);
             RenderTherapies(therapies, medicationsById);
+            RenderExaminations(exams, doctorsById);
 
             AnsiConsole.MarkupLine("[blue]EAGER loading[/]: related data loaded explicitly (manual joins).");
         }
@@ -70,6 +73,11 @@ namespace Medical.ConsoleApp.App
         {
             var all = db.SelectAll<Medication>();
             return all.ToDictionary(x => x.Id, x => x.Name);
+        }
+        private static IDictionary<int, string> BuildDoctorMap(OrmContext db)
+        {
+            var all = db.SelectAll<Doctor>();
+            return all.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName} ({x.Specialization})");
         }
 
         private static Panel BuildPatientPanel(Patient p) =>
@@ -144,5 +152,34 @@ namespace Medical.ConsoleApp.App
 
             AnsiConsole.Write(table);
         }
+        private static void RenderExaminations(IReadOnlyList<Examination> exams, IDictionary<int, string> doctorsById)
+        {
+            if (exams.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[grey]No examinations.[/]");
+                return;
+            }
+
+            var table = new Table().RoundedBorder().Title("Examinations");
+            table.AddColumn("Id");
+            table.AddColumn("Type");
+            table.AddColumn("Scheduled");
+            table.AddColumn("Doctor");
+
+            foreach (var e in exams.OrderBy(x => x.ScheduledAt))
+            {
+                doctorsById.TryGetValue(e.DoctorId, out var docName);
+
+                table.AddRow(
+                    e.Id.ToString(),
+                    e.Type,
+                    e.ScheduledAt.ToString("yyyy-MM-dd HH:mm"),
+                    docName ?? "N/A"
+                );
+            }
+
+            AnsiConsole.Write(table);
+        }
+
     }
 }
